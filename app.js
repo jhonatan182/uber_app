@@ -27,9 +27,6 @@ app.set('json spaces', 2);
 /* rutas */
 app.use('/uber/api/' , routerPrincipal );
 
-
-console.log('hola');
-
 /* configuracion del puerto */
 const port = process.env.PORT || 4000;
 
