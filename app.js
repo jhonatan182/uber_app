@@ -2,10 +2,10 @@ const express = require('express');
 const morgan = require('morgan');
 const db = require('./config/db');
 
-
 /* Rutas importacion*/
 
 const routerPrincipal = require('./Rutas/index');
+const routerTipoU = require('./Rutas/rutasTipoUsuarios');
 
 const app = express();
 
@@ -26,6 +26,7 @@ app.set('json spaces', 2);
 
 /* rutas */
 app.use('/uber/api/' , routerPrincipal );
+app.use('/uber/api/tipou/', routerTipoU);
 
 /* configuracion del puerto */
 const port = process.env.PORT || 4000;

@@ -4,7 +4,7 @@
   "description": "Aplicacion movil de uber",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon app.js"
+    "dev": "nodemon scr/ app.js"
   },
   "author": "Jessy Diaz, Victor Andrade , Cristopher Lanza , Jhonatan Vargas , Khail Cruz , Suany Garcia",
   "license": "ISC",
