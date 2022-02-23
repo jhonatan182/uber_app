@@ -3,6 +3,6 @@ const controladorConductor = require('../controladores/controladorConductor');
 const { body, query} = require('express-validator');
 const router = Router();
 
-router.post('/guardar', controladorVehiculos.editar);
+router.post('/guardar', controladorConductor.guardar);
 
 module.exports = router;
