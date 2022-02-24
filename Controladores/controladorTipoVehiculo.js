@@ -25,15 +25,22 @@ const listarTiposVehiculos = async (req, res) => {
 const guardarNuevoTipo = async (req ,res) => {
 
     let { tipo }  = req.body;
-    tipo = tipo.toLowerCase().trim();
 
     if( !tipo ) {
-        res.send('Todos los campos son obligatorios');
+        res.send(`El tipo de vehiculo es obligatorio`);
         return;
     }
 
     try {
-        
+        tipo = tipo.toLowerCase().trim();
+
+        const existeTipo = await TipoVehiculo.findOne({ where : { tipo } });
+
+        if(existeTipo) {
+            res.send('Ya existe este tipo de vehiculo');
+            return;
+        }
+
         const nuevoTipo = await TipoVehiculo.create({tipo});
 
         if(nuevoTipo) {
