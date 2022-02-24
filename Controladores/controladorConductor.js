@@ -24,7 +24,9 @@ exports.guardar = async (req,res) => {
                 res.send("El id de la Conductor no existe o está inactivo");
             }
             else{
-                await ModeloConductor.create({ 
+
+                await ModeloUsuario.create({ 
+                  
                     nombre,
                     id,
                     apellido, 
@@ -43,6 +45,7 @@ exports.guardar = async (req,res) => {
         }
     }
 };
+
 
 exports.modificar = async (req, res) => {
     const {id} = req.query;
@@ -176,3 +179,4 @@ exports.modificarEstado = async (req, res) => {
         }
     }
 };
+
