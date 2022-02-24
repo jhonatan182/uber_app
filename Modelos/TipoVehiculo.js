@@ -7,6 +7,7 @@ const TipoVehiculo = db.define(
             type:sequelize.INTEGER,
             primaryKey: true,
             allowNull:false,
+            autoIncrement: true
         },
         tipo:{
             type: sequelize.STRING(45),
