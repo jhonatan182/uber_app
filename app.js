@@ -6,7 +6,10 @@ const db = require('./config/db');
 
 const routerPrincipal = require('./Rutas/index');
 const routerTipoU = require('./Rutas/rutasTipoUsuarios');
+const routerTipoVehiculo = require('./Rutas/rutasTipoVehiculo');
 
+
+// inicilizar app
 const app = express();
 
 /* comporobar la conexion a la base de datos */
@@ -27,6 +30,8 @@ app.set('json spaces', 2);
 /* rutas */
 app.use('/uber/api/' , routerPrincipal );
 app.use('/uber/api/tipou/', routerTipoU);
+app.use('/uber/api/vehiculo/tipo' , routerTipoVehiculo);
+
 
 /* configuracion del puerto */
 const port = process.env.PORT || 4000;
