@@ -1,6 +1,7 @@
 const enviarCorreo = require('../config/correo');
 const ModeloUsuario = require('../Modelos/Usuarios');
 const { validationResult } = require('express-validator');
+
 exports.recuperarContrasena = async (req, res) =>{
     const validacion = validationResult(req);
     if(!validacion.isEmpty()){
@@ -12,16 +13,17 @@ exports.recuperarContrasena = async (req, res) =>{
             correo
         });
         const pin = "1234";
-        if(buscarUsuario)
-        const data = {
-            correo: correo,
-            pin: pin,
-        };
-        if(enviarCorreo.recuperarContrasena(data)){
-            res.send("Correo enviado");
-        }
-        else{
-            res.send("Error al enviar correo");
+        if(buscarUsuario){
+            const data = {
+                correo: correo,
+                pin: pin,
+            };
+            if(enviarCorreo.recuperarContrasena(data)){
+                res.send("Correo enviado");
+            }
+            else{
+                res.send("Error al enviar correo");
+            }
         }
     }
 };
