@@ -9,6 +9,9 @@ const routerPrincipal = require('./Rutas/index');
 const routerTipoVehiculo = require('./Rutas/rutasTipoVehiculo');
 const routerTipoU = require('./Rutas/rutasTipoUsuarios');
 
+//cargar variables de entorno
+require('dotenv').config();
+
 // inicilizar app
 const app = express();
 
