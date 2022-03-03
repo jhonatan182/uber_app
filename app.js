@@ -8,6 +8,7 @@ const db = require('./config/db');
 const routerPrincipal = require('./Rutas/index');
 const routerTipoVehiculo = require('./Rutas/rutasTipoVehiculo');
 const routerTipoU = require('./Rutas/rutasTipoUsuarios');
+const routerAutenti = require('./Rutas/rutaAutenticacion');
 
 // inicilizar app
 const app = express();
@@ -29,6 +30,7 @@ app.set('json spaces', 2);
 
 /* rutas */
 app.use('/uber/api/' , routerPrincipal );
+app.use('/uber/api/autenticacion/', routerAutenti);
 app.use('/uber/api/vehiculo/tipo' , routerTipoVehiculo);
 app.use('/uber/api/tipou/', routerTipoU);
 
