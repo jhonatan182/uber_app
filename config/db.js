@@ -1,8 +1,8 @@
 const Sequelize = require('sequelize');
 
-const db = new Sequelize('uber_app' ,'root', 'jonamtv3d' , {
+const db = new Sequelize('uber_app' ,'root', 'Caleb123' , {
 
-    host : '127.0.0.1',
+    host : 'localhost',
     port : '3306',
     dialect : 'mysql',
     define : {

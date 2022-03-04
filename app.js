@@ -8,6 +8,10 @@ const db = require('./config/db');
 const routerPrincipal = require('./Rutas/index');
 const routerTipoVehiculo = require('./Rutas/rutasTipoVehiculo');
 const routerTipoU = require('./Rutas/rutasTipoUsuarios');
+const routerAutenticacion = require('./Rutas/rutasAutenticacion');
+
+//cargar variables de entorno
+require('dotenv').config();
 
 // inicilizar app
 const app = express();
@@ -31,6 +35,7 @@ app.set('json spaces', 2);
 app.use('/uber/api/' , routerPrincipal );
 app.use('/uber/api/vehiculo/tipo' , routerTipoVehiculo);
 app.use('/uber/api/tipou/', routerTipoU);
+app.use('/uber/api/autenticacion', routerAutenticacion);
 
 /* configuracion del puerto */
 const port = process.env.PORT || 4000;
