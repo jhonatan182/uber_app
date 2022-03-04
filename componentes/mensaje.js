@@ -8,3 +8,4 @@ const mensaje = (msj, estado, data, res) =>{ // objeto que enviamos un msj ...
     res.json(mensajes); // se envia el mensaje
     };
     module.exports = mensaje;
+
