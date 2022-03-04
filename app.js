@@ -10,6 +10,7 @@ const routerTipoVehiculo = require('./Rutas/rutasTipoVehiculo');
 const routerTipoU = require('./Rutas/rutasTipoUsuarios');
 const routerAutenti = require('./Rutas/rutaAutenticacion');
 
+
 // inicilizar app
 const app = express();
 
@@ -33,6 +34,7 @@ app.use('/uber/api/' , routerPrincipal );
 app.use('/uber/api/autenticacion/', routerAutenti);
 app.use('/uber/api/vehiculo/tipo' , routerTipoVehiculo);
 app.use('/uber/api/tipou/', routerTipoU);
+
 
 /* configuracion del puerto */
 const port = process.env.PORT || 4000;
