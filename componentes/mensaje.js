@@ -1,10 +1,11 @@
-const mensaje = (msj, estado, data, res) => {
-    var mensajes = {
+const mensaje = (msj, estado, data, res) =>{ // objeto que enviamos un msj ...
+    var mensajes={
         msj: msj,
-        data: data,
+        data: data
     };
-    res.setHeader("Content-Type", "application/json");
-    res.statusCode = estado;
-    res.json(mensajes);
-};
-module.exports = mensaje;
+    res.setHeader("Content-type", "application/json"); // informacion de la cabecera indicando que es formato json
+    res.statusCode=estado; // enviamos un mensaje donde se envia el codigo del estado
+    res.json(mensajes); // se envia el mensaje
+    };
+    module.exports = mensaje;
+
