@@ -11,6 +11,7 @@ const routerTipoU = require('./Rutas/rutasTipoUsuarios');
 const routerAutenti = require('./Rutas/rutaAutenticacion');
 const routerConductor = require('./Rutas/rutasConductor');
 const routerAutenticacion = require('./Rutas/rutasAutenticacion');
+const routerArchivos = require('./Rutas/rutasArchivos');
 
 //cargar variables de entorno
 require('dotenv').config();
@@ -41,6 +42,9 @@ app.use('/uber/api/vehiculo/tipo' , routerTipoVehiculo);
 app.use('/uber/api/tipou/', routerTipoU);
 app.use('/uber/api/conductor', routerConductor);
 app.use('/uber/api/autenticacion', routerAutenticacion);
+app.use('/uber/api/archivos', routerArchivos);
+
+
 
 
 
