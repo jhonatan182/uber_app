@@ -1,5 +1,7 @@
 const Sequelize = require('sequelize');
+
 const db = new Sequelize('uber_app' ,'root', 'jonamtv3d' , {
+
   
     host : 'localhost',
     port : '3306',
