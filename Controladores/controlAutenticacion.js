@@ -1,9 +1,10 @@
 const ModUsua = require('../Modelos/Usuarios');
+const enviarCorreo = require('../config/correo');
 const { validationResult } = require('express-validator');
 const msj = require('../componentes/mensaje');
 const passport = require('../config/passport');
 const { Op } = require("sequelize");
-//const EnviarCorreo = require('../configs/correo');
+
 
 exports.validarAutenticado = passport.validarAutenticado;
 
@@ -61,32 +62,37 @@ exports.enviarToken = async (req, res) => {
     res.status(200).json(data);
 };
 
-/*exports.recuperarContrasena = async (req, res) => {
+
+exports.recuperarContrasena = async (req, res) =>{
+    
     const validacion = validationResult(req);
-    if (!validacion.isEmpty) {
+    if(!validacion.isEmpty()){
         msj("Los datos ingresados no son validos", 200, validacion.array(), res);
     }
-    else {
+    else{
         const { correo } = req.body;
-        var busUsuario = await ModeloUsuar.findOne({
-            where: {
-                correo: correo,
-            }
+
+        var buscarUsuario = await ModUsua.findOne({
+            correo
         });
-        const nuevcontrasea = '159018';
-        if (busUsuario) {
-            busUsuario.contrasena = nuevcontrasea;
-            await busUsuario.save();
+
+        const pin = Math.random().toString(36).substring(2, 8);
+
+        if(buscarUsuario){
+
+            buscarUsuario.password = pin;
+            buscarUsuario.save();
+
             const data = {
-                correo: busUsuario.correo,
-                contrasena: nuevcontrasea,
+                correo,
+                pin,
+            };
+            if(enviarCorreo.recuperarContrasena(data)){
+                msj("Correo Enviado", 200, [], res);
             }
-            EnviarCorreo.recuperarContrasena(data);
-            msj("Correo Enviado", 200, [], res);
-            ressend("Correo enviado");
-        }
-        else {
-            msj("Los datos ingresados no son validos", 200, [], res);
+            else{
+                msj("Los datos ingresados no son validos", 200, [], res);
+            }
         }
     }
-}; */
+};

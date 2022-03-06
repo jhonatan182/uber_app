@@ -3,7 +3,10 @@ const controladorArchivos=require('../Controladores/controladorArchivos');
 const controladorAutenticacion=require('../Controladores/controlAutenticacion');
 const multer =require('multer');
 const path =require('path');
+
+
 const storage =multer.diskStorage({
+
     destination:function(req,file,cb){
         cb(null,path.join(__dirname, '../public/img'));
     },
@@ -12,9 +15,11 @@ const storage =multer.diskStorage({
         cb(null,file.fieldname + '-'+ unico+file.mimetype.replace( "/","."));
     }
 });
+
 const upload=multer({
     storage:storage,
 });
+
 const router =Router ();
 router.post('/img',controladorAutenticacion.validarAutenticado,upload.single('img'), controladorArchivos.Recibir);
 

@@ -14,12 +14,12 @@ exports.ListarTipU = async (req, res) => {
 
 exports.GuardarTipU = async (req, res) =>{
     const { tipo } = req.body;
+    
     if( !tipo ){
         res.send("Debe enviar los datos completos");
     }
     else{
         await ModTipU.create({
-            id: id,
             tipo: tipo
         })
         .then((data) => {

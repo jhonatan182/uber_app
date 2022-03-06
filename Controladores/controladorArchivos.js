@@ -2,6 +2,7 @@ const fs=require('fs');
 const path=require('path');
 //const msj=require('../componentes/mensaje');
 const Usuarios=require('../Modelos/Usuarios');
+
 exports.Recibir=async(req,res)=>{
         const {filename}=req.file;
         const {id}=req.query;

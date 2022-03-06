@@ -1,12 +1,14 @@
 const nodemailer = require('nodemailer');
 
 exports.recuperarContrasena = async (data) => { 
+
     const configuracionCorreo = {
         from: process.env.correo_app,
         to: data.correo,
-        subject: "Recuperar contraseña",
-        text: "Pin: " + data.pin,
+        subject: "Uber - Recuperar contraseña",
+        text: "Tu nueva contraseña es: " + data.pin,
     };
+    
     const transporte = nodemailer.createTransport({
         host: process.env.correo_servicio,
         port: process.env.correo_port,
