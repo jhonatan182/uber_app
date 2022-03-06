@@ -1,8 +1,44 @@
 const ModeloVehiculo = require('../Modelos/Vehiculos');
+
 exports.inicio = (req, res) => {
     res.send("Esto es el inicio de el modulo de tipos de usuarios");
 };
+
+exports.nuevoVehiculo = async (req , res) => {
+
+    const {placa, marca, modelo, color , usuarioId, tipoVehiculo} = req.body;
+
+    if(!placa || !marca || !marca || !modelo || !color || !usuarioId ||  !tipoVehiculo) {
+        res.send('Envie los datos necesarios');
+        return;
+    }
+
+    try {
+        
+        const nuevoVehiculo = await ModeloVehiculo.create({
+            placa,
+            marca,
+            modelo,
+            color,
+            usuarioId,
+            tipoVehiculo
+        });
+
+        if(nuevoVehiculo) {
+            res.send('Su vehiculo fue agregado correctamente');
+        } else {
+            res.send('No se puedo registrar el vehiculo');
+
+        }
+
+    } catch (error) {
+        console.log(error);
+    }
+
+}
+
 exports.editar = async (req, res) => {
+
     const { id } = req.query;
     const { placa, marca, modelo, color, usuarioId, tipoVehiculo } = req.body;
     if(!id || !placa || !marca || !modelo || !color || !usuarioId || !tipoVehiculo){

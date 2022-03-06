@@ -7,11 +7,12 @@ const db = require('./config/db');
 
 const routerPrincipal = require('./Rutas/index');
 const routerTipoVehiculo = require('./Rutas/rutasTipoVehiculo');
+const routerVehiculo = require('./Rutas/rutasVehiculos');
 const routerTipoU = require('./Rutas/rutasTipoUsuarios');
 const routerAutenti = require('./Rutas/rutaAutenticacion');
 const routerConductor = require('./Rutas/rutasConductor');
-const routerAutenticacion = require('./Rutas/rutasAutenticacion');
 const routerArchivos = require('./Rutas/rutasArchivos');
+const routerUsuarios = require('./Rutas/rutasUsuarios');
 
 //cargar variables de entorno
 require('dotenv').config();
@@ -39,10 +40,11 @@ app.set('json spaces', 2);
 app.use('/uber/api/' , routerPrincipal );
 app.use('/uber/api/autenticacion/', routerAutenti);
 app.use('/uber/api/vehiculo/tipo' , routerTipoVehiculo);
+app.use('/uber/api/vehiculo/' , routerVehiculo);
 app.use('/uber/api/tipou/', routerTipoU);
-app.use('/uber/api/conductor', routerConductor);
-app.use('/uber/api/autenticacion', routerAutenticacion);
-app.use('/uber/api/archivos', routerArchivos);
+app.use('/uber/api/conductor/', routerConductor);
+app.use('/uber/api/archivos/', routerArchivos);
+app.use('/uber/api/usuario/', routerUsuarios);
 
 
 

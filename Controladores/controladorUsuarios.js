@@ -1,7 +1,7 @@
 const Usuarios = require('../Modelos/Usuarios');
 const { validationResult } = require("express-validator")
 
-const crearUsario = async(req, res) => {
+const crearUsuario = async(req, res) => {
 
     // console.log( req.body );
 
@@ -12,9 +12,9 @@ const crearUsario = async(req, res) => {
         res.json(validacion.array());
 
     } else {
-        const { nombre, apellido, correo, password, estado, foto, telefono, tipoUsuario } = req.body;
+        const { nombre, apellido, correo, password, telefono, foto , tipoUsuario } = req.body;
 
-        if (!nombre || !apellido || !correo || !password || !estado || !foto || !telefono || !tipoUsuario) {
+        if (!nombre || !apellido || !correo || !password  || !telefono || !tipoUsuario) {
             res.send('Llene los campos obligatorios');
 
         } else {
@@ -25,7 +25,6 @@ const crearUsario = async(req, res) => {
                     apellido,
                     correo,
                     password,
-                    estado,
                     foto,
                     telefono,
                     tipoUsuario
@@ -43,5 +42,5 @@ const crearUsario = async(req, res) => {
 };
 
 module.exports = {
-    crearUsario
+    crearUsuario
 }
