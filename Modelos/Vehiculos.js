@@ -4,34 +4,32 @@ const Vehiculos = db.define(
     "vehiculos",
     {
         id:{
-            type: sequelize.INTEGER,
+            type: Sequelize.INTEGER,
             primaryKey: true,
-            autoIncremet:true,
-            allowNull: false,
+            autoIncrement:true,
         },
         placa:{
-            type: sequelize.STRING(45),
+            type: Sequelize.STRING(45),
             allowNull: false,
         },
         marca:{
-            type: sequelize.STRING(45),
+            type: Sequelize.STRING(45),
             allowNull: false,
         },
         modelo:{
-            type: sequelize.STRING(45),
+            type: Sequelize.STRING(45),
             allowNull: false,
         },
         color:{
-            type: sequelize.STRING(45),
+            type: Sequelize.STRING(45),
             allowNull: false,
         },
         usuarioId:{
-            type: sequelize.INTEGER,
-            allowNull: false,
-            autoIncrement:true,
+            type: Sequelize.INTEGER,
+            allowNull: false
         },
         tipoVehiculo:{
-            type: sequelize.INTEGER,
+            type: Sequelize.INTEGER,
             allowNull: false,
             
         },

@@ -41,9 +41,10 @@ const Usuarios = db.define('usuarios' , {
         }
     }
 }
-
-
 );
+Usuarios.prototype.verificarContrasena = (con, com) =>{
+    return bcrypt.compareSync(con, com);
+}
 
 
 module.exports = Usuarios;

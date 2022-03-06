@@ -6,7 +6,21 @@ const db = require('./config/db');
 /* Rutas importacion*/
 
 const routerPrincipal = require('./Rutas/index');
-const routerUsuarios = require('./Rutas/rutasUsuarios')
+
+const routerTipoVehiculo = require('./Rutas/rutasTipoVehiculo');
+const routerVehiculo = require('./Rutas/rutasVehiculos');
+const routerTipoU = require('./Rutas/rutasTipoUsuarios');
+const routerAutenti = require('./Rutas/rutaAutenticacion');
+const routerConductor = require('./Rutas/rutasConductor');
+const routerArchivos = require('./Rutas/rutasArchivos');
+const routerUsuarios = require('./Rutas/rutasUsuarios');
+
+//cargar variables de entorno
+require('dotenv').config();
+
+
+// inicilizar app
+
 const app = express();
 
 /* comporobar la conexion a la base de datos */
@@ -25,10 +39,16 @@ app.set('json spaces', 2);
 
 
 /* rutas */
-app.use('/uber/api/', routerPrincipal);
 
-// Rutas de la api
-app.use('/uber/api/usuarios', routerUsuarios);
+app.use('/uber/api/' , routerPrincipal );
+app.use('/uber/api/autenticacion/', routerAutenti);
+app.use('/uber/api/vehiculo/tipo' , routerTipoVehiculo);
+app.use('/uber/api/vehiculo/' , routerVehiculo);
+app.use('/uber/api/tipou/', routerTipoU);
+app.use('/uber/api/conductor/', routerConductor);
+app.use('/uber/api/archivos/', routerArchivos);
+app.use('/uber/api/usuario/', routerUsuarios);
+
 
 
 
