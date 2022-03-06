@@ -12,7 +12,8 @@ exports.recuperarContrasena = async (req, res) =>{
         var buscarUsuario = await ModeloUsuario.findOne({
             correo
         });
-        const pin = "1234";
+        const pin = Math.floor(Math.random() * (9999 - 1000)) + 1000;
+        console.log(pin);
         if(buscarUsuario){
             const data = {
                 correo: correo,
