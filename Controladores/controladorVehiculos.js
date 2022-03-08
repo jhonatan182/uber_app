@@ -80,30 +80,38 @@ exports.editar = async (req, res) => {
         }
     }
 };
-exports.eliminar = async (req, res) => {
+
+exports.eliminarVehiculo = async (req, res) => {
     const { id } = req.query;
-   if(!id){
+    if(!id){
         res.send("Envie el id del registro");
     }
     else{
+        var buscarVehiculo = await ModeloVehiculo.findOne({
+            where:{
+                id: id,
+            }
+        });
+        if(!buscarVehiculo){
+            res.send("El id no existe");
+        }
+        else{
             await ModeloVehiculo.destroy({
                 where:
                 {
                     id: id,
                 }
+                
             })
-            .then((data)=>{
+            .then((data) => {
                 console.log(data);
-                if(data==0){
-                    res.send("El id no existe");
-                }
-                else{
-                     res.send("Registro eliminado");
-                }   
+                res.send("Registro Eliminado");
             })
-            .catch((error)=>{
+            .catch((error) => {
                 console.log(error);
-                res.send("Error al eliminar el registro");
-            })
+                res.send("Error al actualizar los datos");
+            });
+        } 
+
     }
 };
