@@ -1,6 +1,6 @@
 const fs=require('fs');
 const path=require('path');
-//const msj=require('../componentes/mensaje');
+const msj=require('../componentes/mensaje');
 const Usuarios=require('../Modelos/Usuarios');
 
 exports.Recibir=async(req,res)=>{
@@ -17,19 +17,19 @@ exports.Recibir=async(req,res)=>{
         }
         else{
             try{
-                const buscarImagen= fs.existsSync(path.join(__dirname, '../public/img/' +
-                buscarUsuario.imagen));
-                if(!buscarImagen){
-                    console.log('La imagen no existe');
+                const buscarfoto= fs.existsSync(path.join(__dirname, '../public/img/' +
+                buscarUsuario.foto));
+                if(!buscarfoto){
+                    console.log('La foto no existe');
                     
                 }
                 else{
                     try{
-                        fs.unlinkSync(path.join(__dirname, '../public/img/'+ buscarUsuario.imagen));
-                        console.log("imagen eliminada");
+                        fs.unlinkSync(path.join(__dirname, '../public/img/'+ buscarUsuario.foto));
+                        console.log("foto eliminada");
                     }
                     catch(error){
-                        console.log('Error al eliminar la imagen' + error);
+                        console.log('Error al eliminar la foto' + error);
                     }
                     
 
@@ -38,7 +38,7 @@ exports.Recibir=async(req,res)=>{
             catch(error){
                 console.log(error);
             }
-            buscarUsuario.imagen=filename;
+            buscarUsuario.foto=filename;
             await buscarUsuario.save()
             .then((data)=>{
                 msj('Archivo almacenado',200,data,res) 
