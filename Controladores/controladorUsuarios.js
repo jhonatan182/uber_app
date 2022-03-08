@@ -43,7 +43,7 @@ const crearUsuario = async(req, res) => {
     }
 };
 
-exports.eliminarUsuario = async (req, res) => {
+const eliminarUsuario = async (req, res) => {
     const { id } = req.query;
     if(!id){
         res.send("Envie el id del registro");
@@ -78,5 +78,6 @@ exports.eliminarUsuario = async (req, res) => {
 };
 
 module.exports = {
-    crearUsuario
+    crearUsuario,
+    eliminarUsuario
 }
