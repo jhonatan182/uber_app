@@ -1,5 +1,6 @@
 const ModeloConductor = require('../Modelos/Usuarios');
 const { validatorResult } = require('express-validator');
+const Usuario = require('../Modelos/Usuarios');
 
 exports.inicio = (req, res) => {
     res.send("Bienvenido este es el inicio de el modulo de Conductores");
@@ -177,6 +178,40 @@ exports.modificarEstado = async (req, res) => {
                 res.send("Error al actualizar los datos");
             })
         }
+    }
+};
+
+exports.EliminarConductor = async (req, res) => {
+    const { id } = req.query;
+    if(!id){
+        res.send("Envie el id del registro");
+    }
+    else{
+        var buscarConductor = await ModeloConductor.findOne({
+            where:{
+                id: id,
+            }
+        });
+        if(!buscarConductor){
+            res.send("El id no existe");
+        }
+        else{
+            await ModeloConductor.destroy({
+                where:
+                {
+                    id: id,
+                }
+                
+            })
+            .then((data) => {
+                console.log(data);
+                res.send("Registro Eliminado");
+            })
+            .catch((error) => {
+                console.log(error);
+                res.send("Error al actualizar los datos");
+            });
+        } 
     }
 };
 
