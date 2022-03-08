@@ -64,6 +64,7 @@ exports.modificarTipoVehiculo = async (req, res) => {
                 id: id,
             }
         });
+
         if(!buscarTipoVehiculo){
             res.send("El id no existe");
         }
@@ -113,6 +114,7 @@ exports.eliminarTipoVehiculo = async (req, res) => {
                 res.send("Error al actualizar los datos");
             });
         } 
+
     }
 };
 
@@ -120,5 +122,7 @@ exports.eliminarTipoVehiculo = async (req, res) => {
 
 module.exports = {
     listarTiposVehiculos,
-    guardarNuevoTipo
+    guardarNuevoTipo,
+    modificartipo,
+    eliminartipo
 }

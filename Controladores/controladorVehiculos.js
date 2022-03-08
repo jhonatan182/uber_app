@@ -1,9 +1,17 @@
 const ModeloVehiculo = require('../Modelos/Vehiculos');
 
 exports.inicio = (req, res) => {
-    res.send("Esto es el inicio de el modulo de tipos de usuarios");
+    res.send("Esto es el inicio de el modulo de tipos de Vehiculos");
 };
-
+exports.listar = async (req, res) => {
+    const listaVehiculos = await ModeloVehiculo.findAll();
+    if(listaVehiculos.length==0){
+        res.send("No existen datos");
+    }
+    else{
+        res.json(listaVehiculos);
+    }
+};
 exports.nuevoVehiculo = async (req , res) => {
 
     const {placa, marca, modelo, color , usuarioId, tipoVehiculo} = req.body;
@@ -104,5 +112,6 @@ exports.eliminarVehiculo = async (req, res) => {
                 res.send("Error al actualizar los datos");
             });
         } 
+
     }
 };
