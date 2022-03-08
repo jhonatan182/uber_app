@@ -5,6 +5,6 @@ const { crearUsuario, eliminarUsuario } = require('../Controladores/controladorU
 const router = express.Router();
 
 router.post('/guardar', crearUsuario)
-router.delete('eliminar', eliminarUsuario)
+router.delete('/eliminar', eliminarUsuario)
 
 module.exports = router;

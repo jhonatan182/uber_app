@@ -44,7 +44,7 @@ app.set('json spaces', 2);
 
 app.use('/uber/api/' , routerPrincipal );
 app.use('/uber/api/autenticacion/', routerAutenti);
-app.use('/uber/api/vehiculo/tipo' , routerTipoVehiculo);
+app.use('/uber/api/vehiculo/tipo/' , routerTipoVehiculo);
 app.use('/uber/api/vehiculo/' , routerVehiculo);
 app.use('/uber/api/tipou/', routerTipoU);
 app.use('/uber/api/conductor/', routerConductor);

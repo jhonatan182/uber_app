@@ -52,7 +52,7 @@ const guardarNuevoTipo = async (req ,res) => {
     }
 }
 
-exports.modificarTipoVehiculo = async (req, res) => {
+const modificarTipoVehiculo = async (req, res) => {
     const { id } = req.query;
     const { tipo } = req.body;
     if(!id || !tipo){
@@ -83,7 +83,7 @@ exports.modificarTipoVehiculo = async (req, res) => {
     }
 };
 
-exports.eliminarTipoVehiculo = async (req, res) => {
+const eliminarTipoVehiculo = async (req, res) => {
     const { id } = req.query;
     if(!id){
         res.send("Envie el id del registro");
@@ -123,6 +123,6 @@ exports.eliminarTipoVehiculo = async (req, res) => {
 module.exports = {
     listarTiposVehiculos,
     guardarNuevoTipo,
-    modificartipo,
-    eliminartipo
+    eliminarTipoVehiculo,
+    modificarTipoVehiculo
 }
