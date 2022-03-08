@@ -1,4 +1,4 @@
-const ModeloConductor = require('../Modelos/Usuarios');
+const ModeloUsuario = require('../Modelos/Usuarios');
 const { validatorResult } = require('express-validator');
 
 exports.inicio = (req, res) => {
@@ -15,7 +15,7 @@ exports.guardar = async (req,res) => {
             res.send("Debe ingresar los datos completos");
         }
         else{
-            const buscarConductor = await ModeloConductor.findOne({
+            const buscarConductor = await ModeloUsuario.findOne({
                 where:{
                     id: id,
                 }
@@ -54,7 +54,7 @@ exports.modificar = async (req, res) => {
         res.send("Envie los datos completos" );
     }
     else{
-        var buscarConductor = await ModeloConductor.findOne({
+        var buscarConductor = await ModeloUsuario.findOne({
             where: {
                 id: id,
             }
@@ -90,7 +90,7 @@ exports.modificarContrasena = async (req, res) => {
         res.send("Envie los datos completos" );
     }
     else{
-        var buscarConductor = await ModeloConductor.findOne({
+        var buscarConductor = await ModeloUsuario.findOne({
             where: {
                 id: id,
                 estado: 'activo'
@@ -122,7 +122,7 @@ exports.modificarNombres = async (req, res) => {
         res.send("Envie los datos completos" );
     }
     else{
-        var buscarConductor = await ModeloConductor.findOne({
+        var buscarConductor = await ModeloUsuario.findOne({
             where: {
                 id: id,
             }
@@ -156,7 +156,7 @@ exports.modificarEstado = async (req, res) => {
         res.send("Envie los datos completos" );
     }
     else{
-        var buscarConductor = await ModeloConductor.findOne({
+        var buscarConductor = await ModeloUsuario.findOne({
             where: {
                 id: id,
             }
