@@ -1,6 +1,5 @@
 const Usuarios = require('../Modelos/Usuarios');
 const { validationResult } = require("express-validator")
-const msj = require('../componentes/mensaje');
 
 const crearUsuario = async(req, res) => {
 
@@ -32,12 +31,11 @@ const crearUsuario = async(req, res) => {
                 });
 
                 if (nuevoUsuario) {
-                    msj('Tu cuenta ha sido creada satisfactoriamente', 200 , [] , res);
+                    res.send('Usuario creado correctamente');
                 }
 
             } catch (error) {
                 console.log(error);
-                msj('Hubo un error al crear el usuario , vuelva a intentarlo', 200 , [] , res);
             }
         }
     }
