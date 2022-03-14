@@ -1,49 +1,9 @@
 const ModeloUsuario = require('../Modelos/Usuarios');
 const { validatorResult } = require('express-validator');
+const Usuario = require('../Modelos/Usuarios');
 
 exports.inicio = (req, res) => {
     res.send("Bienvenido este es el inicio de el modulo de Conductores");
-};
-exports.guardar = async (req,res) => {
-    const validacion = validatorResult(req);
-    if(!validacion.isEmpty()){
-        req.json(validacion.array());
-    }
-    else{
-        const {id, nombre, apellido, correo,telefono} = req.body;
-        if(!id || !nombre || !apellido || !correo|| !telefono ){
-            res.send("Debe ingresar los datos completos");
-        }
-        else{
-            const buscarConductor = await ModeloUsuario.findOne({
-                where:{
-                    id: id,
-                }
-            });
-            if (!buscarConductor){
-                res.send("El id de la Conductor no existe o está inactivo");
-            }
-            else{
-
-                await ModeloUsuario.create({ 
-                  
-                    nombre,
-                    id,
-                    apellido, 
-                    correo,
-                    telefono,
-                })
-                .then((data)=> {
-                    console.log(data);
-                    res.send("Registro Almacenado");
-                })
-                .catch((error)=> {
-                    console.log(error);
-                    res.send("Error al guardar los datos");
-                });
-            }
-        }
-    }
 };
 
 
@@ -177,6 +137,40 @@ exports.modificarEstado = async (req, res) => {
                 res.send("Error al actualizar los datos");
             })
         }
+    }
+};
+
+exports.EliminarConductor = async (req, res) => {
+    const { id } = req.query;
+    if(!id){
+        res.send("Envie el id del registro");
+    }
+    else{
+        var buscarConductor = await ModeloConductor.findOne({
+            where:{
+                id: id,
+            }
+        });
+        if(!buscarConductor){
+            res.send("El id no existe");
+        }
+        else{
+            await ModeloConductor.destroy({
+                where:
+                {
+                    id: id,
+                }
+                
+            })
+            .then((data) => {
+                console.log(data);
+                res.send("Registro Eliminado");
+            })
+            .catch((error) => {
+                console.log(error);
+                res.send("Error al actualizar los datos");
+            });
+        } 
     }
 };
 

@@ -51,60 +51,70 @@ const guardarNuevoTipo = async (req ,res) => {
         console.log(error);
     }
 }
-const modificartipo = async (req, res) => {
+
+const modificarTipoVehiculo = async (req, res) => {
     const { id } = req.query;
     const { tipo } = req.body;
     if(!id || !tipo){
-        res.send("Envie los datos completos");
+        res.send("Datos Imcompletos");
     }
     else{
-        var buscartipo = await TipoVehiculo.findOne({
+        var buscarTipoVehiculo = await TipoVehiculo.findOne({
             where:{
                 id: id,
             }
         });
-        if(!buscartipo){
+
+        if(!buscarTipoVehiculo){
             res.send("El id no existe");
         }
         else{
-            buscartipo.tipo=tipo;
-            await buscartipo.save()
-            .then((data)=>{
+            buscarTipoVehiculo.tipo = tipo,
+            await buscarTipoVehiculo.save()
+            .then((data) =>{
                 console.log(data);
                 res.send("Registro actualizado");
             })
-            .catch((error)=>{
+            .catch((error) =>{
                 console.log(error);
                 res.send("Error al actualizar los datos");
             });
         }
     }
 };
-const eliminartipo = async (req, res) => {
+
+const eliminarTipoVehiculo = async (req, res) => {
     const { id } = req.query;
-   if(!id){
+    if(!id){
         res.send("Envie el id del registro");
     }
     else{
+        var buscarTipoVehiculo = await TipoVehiculo.findOne({
+            where:{
+                id: id,
+            }
+        });
+        if(!buscarTipoVehiculo){
+            res.send("El id no existe");
+        }
+        else{
             await TipoVehiculo.destroy({
                 where:
                 {
                     id: id,
                 }
+                
             })
-            .then((data)=>{
+            .then((data) => {
                 console.log(data);
-                if(data==0){
-                    res.send("El id no existe");
-                }
-                else{
-                     res.send("Registro eliminado");
-                }   
+                res.send("Registro Eliminado");
             })
-            .catch((error)=>{
+            .catch((error) => {
                 console.log(error);
-                res.send("Error al eliminar el registro");
-            })
+                res.send("Error al actualizar los datos");
+            });
+        } 
+
     }
 };
 
@@ -113,6 +123,6 @@ const eliminartipo = async (req, res) => {
 module.exports = {
     listarTiposVehiculos,
     guardarNuevoTipo,
-    modificartipo,
-    eliminartipo
+    eliminarTipoVehiculo,
+    modificarTipoVehiculo
 }

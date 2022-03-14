@@ -12,6 +12,7 @@ exports.incioSesion = async (req, res, next) => {
     const validacion = validationResult(req);
     if (!validacion.isEmpty) {
         msj("Los datos ingresados no son validos", 200, validacion.array(), res);
+        res.send('Llene los campos obligatorios');
     }
     else {
         const { correo, password } = req.body;
@@ -39,6 +40,7 @@ exports.incioSesion = async (req, res, next) => {
                     telefono: buscarUsuario.telefono,
                     correo: buscarUsuario.correo,
                     nombre: buscarUsuario.nombre,
+                    apellido: buscarUsuario.apellido
                 };
                 const token = passport.getToken({ id: buscarUsuario.id});
                 console.log(buscarUsuario);
