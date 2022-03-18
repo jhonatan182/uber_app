@@ -70,31 +70,44 @@ exports.recuperarContrasena = async (req, res) =>{
     const validacion = validationResult(req);
     if(!validacion.isEmpty()){
         msj("Los datos ingresados no son validos", 200, validacion.array(), res);
-    }
-    else{
+
+    } else {
+
+        try {
+
         const { correo } = req.body;
 
-        var buscarUsuario = await ModUsua.findOne({
-            correo
-        });
-
+        const buscarUsuario = await ModUsua.findOne({where : {correo}});
+    
         const pin = Math.random().toString(36).substring(2, 8);
-
+    
         if(buscarUsuario){
-
+    
             buscarUsuario.password = pin;
             buscarUsuario.save();
-
+    
             const data = {
                 correo,
                 pin,
             };
+    
             if(enviarCorreo.recuperarContrasena(data)){
-                msj("Correo Enviado", 200, [], res);
+                msj(`Correo Enviado a la dirreción ${correo}`, 200, 200, res);
+
             }
             else{
-                msj("Los datos ingresados no son validos", 200, [], res);
+                msj("Los datos ingresados no son validos", 400, 400, res);
             }
+    
+        } else {
+            msj(`No se encontró el correo ${correo}`, 400, 400, res);
         }
+        } catch (error) {
+            console.log(error);
+        }
+        
     }
+
+
+    
 };
