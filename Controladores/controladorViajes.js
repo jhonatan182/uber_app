@@ -2,16 +2,23 @@ const Viajes = require('../Modelos/Viajes');
 
 
 const listarViajes = async (req, res) => {
+    const {pasajeroId} = req.query;
 
     try {
         
-        const listarViajes = await Viajes.findAll();
+        const listarViajes = await Viajes.findAll({
+            where: {
+                pasajeroId: pasajeroId,
+            }
+        });
 
         if(!listarViajes.length) {
             res.send('Aun no hay registro , agrega uno!');
+          
 
         } else {
             res.json( listarViajes );
+            
         }
 
 
