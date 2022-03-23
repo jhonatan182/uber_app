@@ -14,7 +14,9 @@ const routerAutenti = require('./Rutas/rutaAutenticacion');
 const routerConductor = require('./Rutas/rutasConductor');
 const routerArchivos = require('./Rutas/rutasArchivos');
 const routerUsuarios = require('./Rutas/rutasUsuarios');
+const routerUbicaciones = require('./Rutas/rutaUbicaciones');
 const routerViajes = require('./Rutas/rutasViajes');
+
 const { patch } = require('./Rutas/rutasArchivos');
 const path = require('path');
 
@@ -51,6 +53,7 @@ app.use('/uber/api/tipou/', routerTipoU);
 app.use('/uber/api/conductor/', routerConductor);
 app.use('/uber/api/archivos/', routerArchivos);
 app.use('/uber/api/usuario/', routerUsuarios);
+app.use('/uber/api/ubicaciones/', routerUbicaciones);
 app.use('/uber/api/usuario/viajes/', routerViajes);
 app.use('/uber/api/usuario/img/', express.static(path.join(__dirname,'public/img')));
 

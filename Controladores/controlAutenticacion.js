@@ -40,7 +40,10 @@ exports.incioSesion = async (req, res, next) => {
                     telefono: buscarUsuario.telefono,
                     correo: buscarUsuario.correo,
                     nombre: buscarUsuario.nombre,
-                    apellido: buscarUsuario.apellido
+                    apellido: buscarUsuario.apellido,
+                    id: buscarUsuario.id,
+                    tipoUsuario: buscarUsuario.tipoUsuario,
+                    estado : buscarUsuario.estado
                 };
                 const token = passport.getToken({ id: buscarUsuario.id});
                 console.log(buscarUsuario);

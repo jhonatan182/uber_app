@@ -32,12 +32,12 @@ const crearUsuario = async(req, res) => {
                 });
 
                 if (nuevoUsuario) {
-                    msj('Tu cuenta ha sido creada satisfactoriamente', 200 , [] , res);
+                    msj('Tu cuenta ha sido creada satisfactoriamente', 200 , 200 , res);
                 }
 
             } catch (error) {
                 console.log(error);
-                msj('Hubo un error al crear el usuario , vuelva a intentarlo', 200 , [] , res);
+                msj('Hubo un error al crear el usuario , vuelva a intentarlo', 400 , 400 , res);
             }
         }
     }
@@ -77,7 +77,27 @@ const eliminarUsuario = async (req, res) => {
     }
 };
 
+const listarConductores = async(req , res) => {
+
+    try {
+        
+        const conductores = await Usuarios.findAll({where: {tipoUsuario: 1}})
+        
+        if(conductores.length) {
+            msj('conductores' , 200 , conductores , res);
+        } else {
+            msj('conductores' , 400 , conductores , res);
+        }
+
+    } catch (error) {
+        console.log(error);
+    }
+
+}
+
+
 module.exports = {
     crearUsuario,
-    eliminarUsuario
+    eliminarUsuario,
+    listarConductores
 }
