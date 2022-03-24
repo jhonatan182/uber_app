@@ -78,10 +78,10 @@ const eliminarUsuario = async (req, res) => {
 };
 
 const listarConductores = async(req , res) => {
-
+    const {id} = req.query;
     try {
         
-        const conductores = await Usuarios.findAll({where: {tipoUsuario: 1}})
+        const conductores = await Usuarios.findAll({where: {tipoUsuario: 1, id: id}})
         
         if(conductores.length) {
             msj('conductores' , 200 , conductores , res);
