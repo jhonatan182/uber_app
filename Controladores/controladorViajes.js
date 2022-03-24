@@ -30,10 +30,10 @@ const listarViajes = async (req, res) => {
 
 const guardarViaje = async (req , res) => {
 
-    const {pasajeroId, conductorId, direccionInicial, direccionFinal , fechaHora } = req.body;
+    const {pasajeroId, conductorId, direccionInicial, destinoFinal , fechaHora,distancia, total } = req.body;
 
-    if(!pasajeroId || !conductorId || !direccionInicial || !direccionFinal || !fechaHora ) {
-        res.send('Envie los datos necesarios');
+    if(!pasajeroId || !conductorId || !direccionInicial || !destinoFinal || !distancia || !total ) {
+        res.json('Envie los datos necesarios');
         return;
     }
 
@@ -43,14 +43,15 @@ const guardarViaje = async (req , res) => {
            pasajeroId,
            conductorId,
            direccionInicial,
-           direccionFinal,
-           fechaHora
+           destinoFinal : destinoFinal,
+           distancia,
+           total
         });
 
         if(guardarViaje) {
-            res.send('Datos guardados correctamente');
+            res.json('Datos guardados correctamente');
         } else {
-            res.send('No se puedo guardar el registro');
+            res.json('No se puedo guardar el registro');
 
         }
 

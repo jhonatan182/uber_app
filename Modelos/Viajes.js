@@ -31,7 +31,6 @@ const Viaje = db.define(
         },
         fechaHora:{
             type: sequelize.DATE,
-            allowNull: false,
         },
         total:{
             type: sequelize.DECIMAL(4,2),
