@@ -80,7 +80,8 @@ const eliminarUsuario = async (req, res) => {
 const listarConductores = async(req , res) => {
 
     try {
-        
+
+
         const conductores = await Usuarios.findAll({where: {tipoUsuario: 1}})
         
         if(conductores.length) {
@@ -96,8 +97,29 @@ const listarConductores = async(req , res) => {
 }
 
 
+const obtenerUsuarioPorId= async (req ,res) => {
+
+    try {
+        const { id } = req.query;
+
+        const conductores = await Usuarios.findOne({where: {id}})
+        
+        if(conductores) {
+            msj('conductores' , 200 , conductores , res);
+        } else {
+            msj('conductores' , 400 , conductores , res);
+        }
+
+    } catch (error) {
+        console.log(error);
+    }
+
+
+}
+
 module.exports = {
     crearUsuario,
     eliminarUsuario,
-    listarConductores
+    listarConductores,
+    obtenerUsuarioPorId
 }
