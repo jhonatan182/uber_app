@@ -55,7 +55,7 @@ const editarUbicacion = async (req, res) => {
     const { id } = req.query;
     const { nombre } = req.body;
     if(!id || !nombre){
-        res.send("Datos Incompletos");
+        res.json("Datos Incompletos");
     }
     else{
         var buscarubicaciones = await ubicaciones.findOne({
@@ -65,18 +65,18 @@ const editarUbicacion = async (req, res) => {
         });
 
         if(!buscarubicaciones){
-            res.send("El id no existe");
+            res.json("El id no existe");
         }
         else{
             buscarubicaciones.nombre = nombre,
             await buscarubicaciones.save()
             .then((data) =>{
                 console.log(data);
-                res.send("Registro actualizado");
+                res.json("Registro actualizado");
             })
             .catch((error) =>{
                 console.log(error);
-                res.send("Error al actualizar los datos");
+                res.json("Error al actualizar los datos");
             });
         }
     }
@@ -85,7 +85,7 @@ const editarUbicacion = async (req, res) => {
 const eliminarUbicacion = async (req, res) => {
     const { id } = req.query;
     if(!id){
-        res.send("Envie el id del registro");
+        res.json("Envie el id del registro");
     }
     else{
         var buscarUbicacion = await Ubicaciones.findOne({
@@ -94,7 +94,7 @@ const eliminarUbicacion = async (req, res) => {
             }
         });
         if(!buscarUbicacion){
-            res.send("El id no existe");
+            res.json("El id no existe");
         }
         else{
             await Ubicaciones.destroy({
@@ -106,11 +106,11 @@ const eliminarUbicacion = async (req, res) => {
             })
             .then((data) => {
                 console.log(data);
-                res.send("Registro Eliminado");
+                res.json("Registro Eliminado");
             })
             .catch((error) => {
                 console.log(error);
-                res.send("Error al actualizar los datos");
+                res.json("Error al actualizar los datos");
             });
         } 
 
