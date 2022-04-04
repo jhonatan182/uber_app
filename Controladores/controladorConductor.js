@@ -110,10 +110,12 @@ exports.modificarNombres = async (req, res) => {
 
 
 exports.modificarEstado = async (req, res) => {
-    const { id } = req.query;
-    const { estado } = req.body;
-    if (!id || !estado) {
-        res.send("Envie los datos completos");
+
+    const {id} = req.query;
+    const {estado} = req.body;
+    
+    if (!id || !estado){
+        res.json("Envie los datos completos" );
     }
     else {
         var buscarConductor = await ModeloUsuario.findOne({
@@ -121,21 +123,24 @@ exports.modificarEstado = async (req, res) => {
                 id: id,
             }
         });
-        if (!buscarTipo) {
-            res.send("El id no esixte");
+
+        if (!buscarConductor){
+            res.json("El id no esixte");
         }
         else {
             buscarConductor.estado = estado;
 
             await buscarConductor.save()
-                .then((data) => {
-                    console.log(data);
-                    res.send("Registro Actualizado");
-                })
-                .catch((error) => {
-                    console.log(error);
-                    res.send("Error al actualizar los datos");
-                })
+
+            .then((data) => {
+                console.log(data);
+                res.json("Registro Actualizado");
+            })
+            .catch((error) => {
+                console.log(error);
+                res.json("Error al actualizar los datos");
+            })
+
         }
     }
 };

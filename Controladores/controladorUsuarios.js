@@ -31,8 +31,12 @@ const crearUsuario = async(req, res) => {
                     tipoUsuario
                 });
 
+                const data = {
+                    usuario : nuevoUsuario
+                }
+
                 if (nuevoUsuario) {
-                    msj('Tu cuenta ha sido creada satisfactoriamente', 200 , 200 , res);
+                    msj('Tu cuenta ha sido creada satisfactoriamente', 200 , data , res);
                 }
 
             } catch (error) {
@@ -96,6 +100,24 @@ const listarConductores = async(req , res) => {
 
 }
 
+const listarPasajeros = async (req , res) => {
+
+    try {
+
+
+        const pasajeros = await Usuarios.findAll({where: {tipoUsuario: 2}})
+        
+        if(pasajeros.length) {
+            msj('pasajeros' , 200 , pasajeros , res);
+        } else {
+            msj('pasajeros' , 400 , pasajeros , res);
+        }
+
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 
 const obtenerUsuarioPorId= async (req ,res) => {
 
@@ -121,5 +143,6 @@ module.exports = {
     crearUsuario,
     eliminarUsuario,
     listarConductores,
-    obtenerUsuarioPorId
+    obtenerUsuarioPorId,
+    listarPasajeros
 }
