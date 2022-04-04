@@ -3,7 +3,7 @@ const { listarTiposVehiculos , guardarNuevoTipo, modificarTipoVehiculo, eliminar
 
 const router = express.Router();
 
-router.get('/', listarTiposVehiculos);
+router.get('/listar', listarTiposVehiculos);
 router.post('/guardar', guardarNuevoTipo);
 router.put('/modificar', modificarTipoVehiculo);
 router.delete('/eliminar', eliminarTipoVehiculo);
