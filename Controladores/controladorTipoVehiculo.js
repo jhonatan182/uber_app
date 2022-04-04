@@ -8,7 +8,7 @@ const listarTiposVehiculos = async (req, res) => {
         const listarTipos = await TipoVehiculo.findAll();
 
         if(!listarTipos.length) {
-            res.send('Aun no hay registro , agrega uno!');
+            res.json('Aun no hay registro , agrega uno!');
 
         } else {
             res.json( listarTipos );
@@ -27,7 +27,7 @@ const guardarNuevoTipo = async (req ,res) => {
     let { tipo }  = req.body;
 
     if( !tipo ) {
-        res.send(`El tipo de vehiculo es obligatorio`);
+        res.json(`El tipo de vehiculo es obligatorio`);
         return;
     }
 
@@ -37,14 +37,14 @@ const guardarNuevoTipo = async (req ,res) => {
         const existeTipo = await TipoVehiculo.findOne({ where : { tipo } });
 
         if(existeTipo) {
-            res.send('Ya existe este tipo de vehiculo');
+            res.json('Ya existe este tipo de vehiculo');
             return;
         }
 
         const nuevoTipo = await TipoVehiculo.create({tipo});
 
         if(nuevoTipo) {
-            res.send('Registro creado');
+            res.json('Registro creado');
         }
 
     } catch (error) {
@@ -56,7 +56,7 @@ const modificarTipoVehiculo = async (req, res) => {
     const { id } = req.query;
     const { tipo } = req.body;
     if(!id || !tipo){
-        res.send("Datos Imcompletos");
+        res.json("Datos Imcompletos");
     }
     else{
         var buscarTipoVehiculo = await TipoVehiculo.findOne({
@@ -66,18 +66,18 @@ const modificarTipoVehiculo = async (req, res) => {
         });
 
         if(!buscarTipoVehiculo){
-            res.send("El id no existe");
+            res.json("El id no existe");
         }
         else{
             buscarTipoVehiculo.tipo = tipo,
             await buscarTipoVehiculo.save()
             .then((data) =>{
                 console.log(data);
-                res.send("Registro actualizado");
+                res.json("Registro actualizado");
             })
             .catch((error) =>{
                 console.log(error);
-                res.send("Error al actualizar los datos");
+                res.json("Error al actualizar los datos");
             });
         }
     }
@@ -86,7 +86,7 @@ const modificarTipoVehiculo = async (req, res) => {
 const eliminarTipoVehiculo = async (req, res) => {
     const { id } = req.query;
     if(!id){
-        res.send("Envie el id del registro");
+        res.json("Envie el id del registro");
     }
     else{
         var buscarTipoVehiculo = await TipoVehiculo.findOne({
@@ -95,7 +95,7 @@ const eliminarTipoVehiculo = async (req, res) => {
             }
         });
         if(!buscarTipoVehiculo){
-            res.send("El id no existe");
+            res.json("El id no existe");
         }
         else{
             await TipoVehiculo.destroy({
@@ -107,22 +107,41 @@ const eliminarTipoVehiculo = async (req, res) => {
             })
             .then((data) => {
                 console.log(data);
-                res.send("Registro Eliminado");
+                res.json("Registro Eliminado");
             })
             .catch((error) => {
                 console.log(error);
-                res.send("Error al actualizar los datos");
+                res.json("Error al actualizar los datos");
             });
         } 
 
     }
 };
 
+const obtenerId= async (req ,res) => {
 
+    try {
+        const { id } = req.query;
+
+        const tipo = await TipoVehiculo.findOne({where: {id}})
+        
+        if(tipo) {
+            msj('tipo' , 200 , tipo , res);
+        } else {
+            msj('tipo' , 400 , tipo , res);
+        }
+
+    } catch (error) {
+        console.log(error);
+    }
+
+
+}
 
 module.exports = {
     listarTiposVehiculos,
     guardarNuevoTipo,
     eliminarTipoVehiculo,
-    modificarTipoVehiculo
+    modificarTipoVehiculo,
+    obtenerId
 }
