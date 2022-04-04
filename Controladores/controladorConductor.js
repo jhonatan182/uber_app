@@ -8,101 +8,101 @@ exports.inicio = (req, res) => {
 
 
 exports.modificar = async (req, res) => {
-    const {id} = req.query;
-    const {nombre,apellido, correo, telefono, estado, foto} = req.body;
-    if (!id || !nombre || !apellido || !correo || !telefono || !estado || !foto){
-        res.send("Envie los datos completos" );
+    //console.log(req.query)
+    //console.log(req.body)
+    const { id } = req.query;
+    const { nombre, apellido, correo, telefono, foto } = req.body;
+    if (!id || !nombre || !apellido || !correo || !telefono) {
+        res.send("Envie los datos completos");
     }
-    else{
+    else {
         var buscarConductor = await ModeloUsuario.findOne({
             where: {
                 id: id,
             }
         });
-        if (!buscarConductor){
+        if (!buscarConductor) {
             res.send("El id no esixte");
         }
-        else{
+        else {
             buscarConductor.nombre = nombre;
             buscarConductor.apellido = apellido;
             buscarConductor.correo = correo;
             buscarConductor.telefono = telefono;
-            buscarConductor.estado = estado;
-            buscarConductor.foto = foto;
 
             await buscarConductor.save()
-            .then((data) => {
-                console.log(data);
-                res.send("Registro Actualizado");
-            })
-            .catch((error) => {
-                console.log(error);
-                res.send("Error al actualizar los datos");
-            });
+                .then((data) => {
+                    console.log(data);
+                    res.send("Registro Actualizado");
+                })
+                .catch((error) => {
+                    console.log(error);
+                    res.send("Error al actualizar los datos");
+                });
         }
     }
 };
 
 exports.modificarContrasena = async (req, res) => {
-    const {id} = req.query;
-    const {contrasena} = req.body;
-    if (!id || !contrasena){
-        res.send("Envie los datos completos" );
+    const { id } = req.query;
+    const { contrasena } = req.body;
+    if (!id || !contrasena) {
+        res.send("Envie los datos completos");
     }
-    else{
+    else {
         var buscarConductor = await ModeloUsuario.findOne({
             where: {
                 id: id,
                 estado: 'activo'
             }
         });
-        if (!buscarTipo){
+        if (!buscarTipo) {
             res.send("El id no esixte o está inactivo");
         }
-        else{
+        else {
             buscarConductor.contrasena = contrasena;
 
             await buscarConductor.save()
-            .then((data) => {
-                console.log(data);
-                res.send("Registro Actualizado");
-            })
-            .catch((error) => {
-                console.log(error);
-                res.send("Error al actualizar los datos");
-            })
+                .then((data) => {
+                    console.log(data);
+                    res.send("Registro Actualizado");
+                })
+                .catch((error) => {
+                    console.log(error);
+                    res.send("Error al actualizar los datos");
+                })
         }
     }
 };
 
 exports.modificarNombres = async (req, res) => {
-    const {id} = req.query;
-    const {nombre,apellido} = req.body;
-    if (!id || !nombre || !apellido){
-        res.send("Envie los datos completos" );
+    const { id } = req.query;
+    const { nombre, apellido } = req.body;
+    if (!id || !nombre || !apellido) {
+        res.send("Envie los datos completos");
     }
-    else{
+    else {
         var buscarConductor = await ModeloUsuario.findOne({
             where: {
                 id: id,
             }
         });
-        if (!buscarTipo){
+        if (!buscarTipo) {
             res.send("El id no esixte");
         }
-        else{
+        else {
             buscarConductor.nombre = nombre;
             buscarConductor.apellido = apellido;
 
             await buscarConductor.save()
-            .then((data) => {
-                console.log(data);
-                res.send("Registro Actualizado");
-            })
-            .catch((error) => {
-                console.log(error);
-                res.send("Error al actualizar los datos");
-            })
+                .then((data) => {
+                    console.log(data);
+                    res.send("Registro Actualizado");
+                })
+                .catch((error) => {
+                    console.log(error);
+                    res.send("Error al actualizar los datos");
+                })
         }
     }
 };
@@ -110,67 +110,67 @@ exports.modificarNombres = async (req, res) => {
 
 
 exports.modificarEstado = async (req, res) => {
-    const {id} = req.query;
-    const {estado} = req.body;
-    if (!id || !estado){
-        res.send("Envie los datos completos" );
+    const { id } = req.query;
+    const { estado } = req.body;
+    if (!id || !estado) {
+        res.send("Envie los datos completos");
     }
-    else{
+    else {
         var buscarConductor = await ModeloUsuario.findOne({
             where: {
                 id: id,
             }
         });
-        if (!buscarTipo){
+        if (!buscarTipo) {
             res.send("El id no esixte");
         }
-        else{ 
+        else {
             buscarConductor.estado = estado;
 
             await buscarConductor.save()
-            .then((data) => {
-                console.log(data);
-                res.send("Registro Actualizado");
-            })
-            .catch((error) => {
-                console.log(error);
-                res.send("Error al actualizar los datos");
-            })
+                .then((data) => {
+                    console.log(data);
+                    res.send("Registro Actualizado");
+                })
+                .catch((error) => {
+                    console.log(error);
+                    res.send("Error al actualizar los datos");
+                })
         }
     }
 };
 
 exports.EliminarConductor = async (req, res) => {
     const { id } = req.query;
-    if(!id){
+    if (!id) {
         res.send("Envie el id del registro");
     }
-    else{
+    else {
         var buscarConductor = await ModeloConductor.findOne({
-            where:{
+            where: {
                 id: id,
             }
         });
-        if(!buscarConductor){
+        if (!buscarConductor) {
             res.send("El id no existe");
         }
-        else{
+        else {
             await ModeloConductor.destroy({
                 where:
                 {
                     id: id,
                 }
-                
+
             })
-            .then((data) => {
-                console.log(data);
-                res.send("Registro Eliminado");
-            })
-            .catch((error) => {
-                console.log(error);
-                res.send("Error al actualizar los datos");
-            });
-        } 
+                .then((data) => {
+                    console.log(data);
+                    res.send("Registro Eliminado");
+                })
+                .catch((error) => {
+                    console.log(error);
+                    res.send("Error al actualizar los datos");
+                });
+        }
     }
 };
 
