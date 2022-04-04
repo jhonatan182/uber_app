@@ -47,15 +47,15 @@ exports.nuevoVehiculo = async (req , res) => {
 
 exports.editar = async (req, res) => {
 
-    const { id } = req.query;
-    const { placa, marca, modelo, color, usuarioId, tipoVehiculo } = req.body;
-    if(!id || !placa || !marca || !modelo || !color || !usuarioId || !tipoVehiculo){
+    const { usuarioId } = req.query;
+    const { placa, marca, modelo, color } = req.body;
+    if(!usuarioId || !placa || !marca || !modelo || !color){
         res.send("Envie los datos completos");
     }
     else{
         var buscarvehiculo = await ModeloVehiculo.findOne({
             where:{
-                id: id,
+                usuarioId,
             }
         });
         if(!buscarvehiculo){
@@ -66,16 +66,14 @@ exports.editar = async (req, res) => {
             buscarvehiculo.marca=marca;
             buscarvehiculo.modelo=modelo;
             buscarvehiculo.color=color;
-            buscarvehiculo.usuarioId=usuarioId;
-            buscarvehiculo.tipoVehiculo=tipoVehiculo;
             await buscarvehiculo.save()
             .then((data)=>{
                 console.log(data);
-                res.send("Registro actualizado");
+                res.json("Registro actualizado");
             })
             .catch((error)=>{
                 console.log(error);
-                res.send("Error al actualizar los datos");
+                res.json("Error al actualizar los datos");
             });
         }
     }
@@ -115,3 +113,30 @@ exports.eliminarVehiculo = async (req, res) => {
 
     }
 };
+
+
+exports.obtenerVehiculoPorUsuario = async (req, res) => {
+
+    const {usuarioId} = req.query;
+
+    if(!usuarioId) {
+        res.json('Debes enviar un id del usuario');
+        return;
+    }
+
+    try {
+        
+        const vehiculoConductor = await ModeloVehiculo.findOne({where : {usuarioId}});
+
+        if(vehiculoConductor) {
+            res.json(vehiculoConductor);
+
+        } else {
+            res.json('Usuario no tiene asignado ningun vehiculo')
+        }
+
+    } catch (error) {
+        console.log(error);
+    }
+
+}
