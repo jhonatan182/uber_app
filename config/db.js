@@ -2,6 +2,7 @@ const Sequelize = require('sequelize');
 
 const db = new Sequelize('uber_app' ,'root', 'Caleb123' , {  
 
+
     host : 'localhost',
     port : '3306',
     dialect : 'mysql',
