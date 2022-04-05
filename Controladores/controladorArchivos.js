@@ -6,7 +6,7 @@ const Usuarios=require('../Modelos/Usuarios');
 exports.Recibir=async(req,res)=>{
         const {filename}=req.file;
         const {id}=req.query;
-        console.log(id);
+
         var buscarUsuario=await Usuarios.findOne({
             where:{
                 id:id,

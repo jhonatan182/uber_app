@@ -5,7 +5,7 @@ const router = express.Router();
 
 
 router.get('/', (req, res) => {
-    res.send('Bienvenido a la aplicacion de Uber!! :)');
+    res.json('Bienvenido a la aplicacion de Uber!! :)');
 });
 
 

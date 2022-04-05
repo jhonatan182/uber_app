@@ -4,7 +4,7 @@ exports.ListarTipU = async (req, res) => {
     const tipu = await ModTipU.findAll();
     if(tipu.length==0)
     {
-        res.send("No existen Registros");
+        res.json("No existen Registros");
     }
     else
     {
@@ -16,7 +16,7 @@ exports.GuardarTipU = async (req, res) =>{
     const { tipo } = req.body;
     
     if( !tipo ){
-        res.send("Debe enviar los datos completos");
+        res.json("Debe enviar los datos completos");
     }
     else{
         await ModTipU.create({
@@ -24,7 +24,7 @@ exports.GuardarTipU = async (req, res) =>{
         })
         .then((data) => {
             console.log(data);
-            res.send("Registro almacenado correctamente");
+            res.json("Registro almacenado correctamente");
         })
         .catch((error) =>{
             console.log(error)
@@ -36,7 +36,7 @@ exports.ActualizarTipoU = async (req, res) => {
     const { id } = req.query;
     const { tipo } = req.body;
     if(!id || !tipo){
-        res.send("Datos Imcompletos");
+        res.json("Datos Imcompletos");
     }
     else{
         var buscartipou = await ModTipU.findOne({
@@ -45,18 +45,18 @@ exports.ActualizarTipoU = async (req, res) => {
             }
         });
         if(!buscartipou){
-            res.send("El id no existe");
+            res.json("El id no existe");
         }
         else{
             buscartipou.tipo = tipo,
             await buscartipou.save()
             .then((data) =>{
                 console.log(data);
-                res.send("Registro actualizado");
+                res.json("Registro actualizado");
             })
             .catch((error) =>{
                 console.log(error);
-                res.send("Error al actualizar los datos");
+                res.json("Error al actualizar los datos");
             });
         }
     }
@@ -65,7 +65,7 @@ exports.ActualizarTipoU = async (req, res) => {
 exports.EliminarTipoU = async (req, res) => {
     const { id } = req.query;
     if(!id){
-        res.send("Envie el id del registro");
+        res.json("Envie el id del registro");
     }
     else{
         var buscartipou = await ModTipU.findOne({
@@ -74,7 +74,7 @@ exports.EliminarTipoU = async (req, res) => {
             }
         });
         if(!buscartipou){
-            res.send("El id no existe");
+            res.json("El id no existe");
         }
         else{
             await ModTipU.destroy({
@@ -86,11 +86,11 @@ exports.EliminarTipoU = async (req, res) => {
             })
             .then((data) => {
                 console.log(data);
-                res.send("Registro Eliminado");
+                res.json("Registro Eliminado");
             })
             .catch((error) => {
                 console.log(error);
-                res.send("Error al actualizar los datos");
+                res.json("Error al actualizar los datos");
             });
         } 
     }
