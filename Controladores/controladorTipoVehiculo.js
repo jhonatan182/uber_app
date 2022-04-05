@@ -1,5 +1,5 @@
 const TipoVehiculo = require('../Modelos/TipoVehiculo');
-
+const msj = require('../componentes/mensaje');
 
 const listarTiposVehiculos = async (req, res) => {
 
@@ -85,6 +85,7 @@ const modificarTipoVehiculo = async (req, res) => {
 
 const eliminarTipoVehiculo = async (req, res) => {
     const { id } = req.query;
+    
     if(!id){
         res.json("Envie el id del registro");
     }
@@ -111,7 +112,7 @@ const eliminarTipoVehiculo = async (req, res) => {
             })
             .catch((error) => {
                 console.log(error);
-                res.json("Error al actualizar los datos");
+                res.json("No puedes eliminar este vehículo porque está siendo utilizado");
             });
         } 
 

@@ -6,5 +6,6 @@ router.post('/guardarViajes' , controladorViajes.guardarViaje );
 router.put('/editarViaje', controladorViajes.editarviaje);
 router.get('/listarViaje', controladorViajes.listarViajes);
 router.delete('/eliminarViaje', controladorViajes.eliminarViaje);
+router.get('/viajesConductor', controladorViajes.listarViajesConductor);
 
 module.exports=router;

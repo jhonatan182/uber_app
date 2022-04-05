@@ -54,11 +54,12 @@ const guardarUbicacion = async (req , res) => {
 const editarUbicacion = async (req, res) => {
     const { id } = req.query;
     const { nombre } = req.body;
+
     if(!id || !nombre){
         res.json("Datos Incompletos");
     }
     else{
-        var buscarubicaciones = await ubicaciones.findOne({
+        var buscarubicaciones = await Ubicaciones.findOne({
             where:{
                 id: id,
             }
@@ -118,12 +119,33 @@ const eliminarUbicacion = async (req, res) => {
 };
 
 
+const obtenerId= async (req ,res) => {
+
+    try {
+        const { id } = req.query;
+
+        const ubicacion = await Ubicaciones.findOne({where: {id}})
+        
+        if(ubicacion) {
+            msj('tipo' , 200 , ubicacion , res);
+        } else {
+            msj('tipo' , 400 , ubicacion , res);
+        }
+
+    } catch (error) {
+        console.log(error);
+    }
+
+
+};
+
 
 
 module.exports = {
     ubicaciones,
     guardarUbicacion,
     editarUbicacion,
-    eliminarUbicacion
+    eliminarUbicacion,
+    obtenerId
 
 }

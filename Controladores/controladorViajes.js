@@ -1,5 +1,5 @@
 const Viajes = require('../Modelos/Viajes');
-
+const msj = require('../componentes/mensaje');
 
 const listarViajes = async (req, res) => {
     const {pasajeroId} = req.query;
@@ -13,11 +13,39 @@ const listarViajes = async (req, res) => {
         });
 
         if(!listarViajes.length) {
-            res.send('Aun no hay registro , agrega uno!');
+            msj('No has realizado ningun viaje, pide un Uber!', 200 , listarViajes , res);
+        
+        } else {
+
+            msj('Viajes encontrados', 200 , listarViajes , res);
+            
+        }
+
+
+    } catch (error) {
+        console.log(error);
+    }
+
+};
+
+
+const listarViajesConductor = async (req, res) => {
+    const {conductorId} = req.query;
+
+    try {
+        
+        const listarViajes = await Viajes.findAll({
+            where: {
+                conductorId: conductorId,
+            }
+        });
+
+        if(!listarViajes.length) {
+            msj('Aun no tienes viajes asignados', 200 , listarViajes , res);
           
 
         } else {
-            res.json( listarViajes );
+            msj('Viajes encontrados', 200 , listarViajes , res);
             
         }
 
@@ -67,7 +95,7 @@ const editarviaje = async (req, res) => {
     const {pasajeroId, conductorId, direccionInicial, direccionFinal , fechaHora } = req.body;
 
     if(!id || !pasajeroId || !conductorId || !direccionInicial || !direccionFinal || !fechaHora ) {
-        res.send("Envie los datos completos");
+        res.json("Envie los datos completos");
     }
     else{
         var buscarviaje = await Viajes.findOne({
@@ -76,7 +104,7 @@ const editarviaje = async (req, res) => {
             }
         });
         if(!buscarviaje){
-            res.send("El id no existe");
+            res.json("El id no existe");
         }
         else{
             buscarviaje.pasajeroId=pasajeroId;
@@ -87,11 +115,11 @@ const editarviaje = async (req, res) => {
             await buscarviaje.save()
             .then((data)=>{
                 console.log(data);
-                res.send("Registro actualizado");
+                res.json("Registro actualizado");
             })
             .catch((error)=>{
                 console.log(error);
-                res.send("Error al actualizar los datos");
+                res.json("Error al actualizar los datos");
             });
         }
     }
@@ -100,7 +128,7 @@ const editarviaje = async (req, res) => {
 const eliminarViaje = async (req, res) => {
     const { id } = req.query;
     if(!id){
-        res.send("Envie el id del registro");
+        res.json("Envie el id del registro");
     }
     else{
         var buscarviaje = await Viajes.findOne({
@@ -109,7 +137,7 @@ const eliminarViaje = async (req, res) => {
             }
         });
         if(!buscarviaje){
-            res.send("El id no existe");
+            res.json("El id no existe");
         }
         else{
             await Viajes.destroy({
@@ -121,11 +149,11 @@ const eliminarViaje = async (req, res) => {
             })
             .then((data) => {
                 console.log(data);
-                res.send("Registro Eliminado");
+                res.json("Registro Eliminado");
             })
             .catch((error) => {
                 console.log(error);
-                res.send("Error al actualizar los datos");
+                res.json("Error al actualizar los datos");
             });
         } 
 
@@ -140,5 +168,6 @@ module.exports = {
     listarViajes,
     guardarViaje,
     editarviaje,
-    eliminarViaje
+    eliminarViaje,
+    listarViajesConductor
 }
